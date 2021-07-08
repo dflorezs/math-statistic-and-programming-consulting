@@ -1,13 +1,16 @@
-#include<stdio.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #define F 5
 #define C 5
+#define tam 50
 
 //Letra faltante en la matriz
 char codigo;
 
 //Prototipos de funciones
 void leeCodigo(int matriz[][C]);
-void leeTexto();
+void leeTexto(char *arr);
 void codifica(int matriz[][C], char *arr);
 void decodifica(int matirz[][C], char *arr);
 void muestraMatriz(int matriz[][C]);
@@ -15,13 +18,13 @@ void muestraTexto(int *arr);
 
 int main(){
     int matriz[F][C];
-    char *textoOriginal = new char;
-    char *textoCodificado = new char;
-    char *textoDescodificado = new char;
+    char textoOriginal[tam];
+    //char *textoCodificado = new char;
+    //char *textoDescodificado = new char;
 
     leeCodigo(matriz);
     muestraMatriz(matriz);
-    //leeTexto();
+    leeTexto(textoOriginal);
     //muestraTexto(textoOriginal);
     //codifica(matriz, textoOriginal);
     //muestraTexto(textoCodificado);
@@ -60,4 +63,12 @@ void muestraMatriz(int matriz[][C]){
      for (int f = 0; f < 5; f++){
         printf("%c  %c  %c  %c  %c\n", matriz[f][0], matriz[f][1], matriz[f][2], matriz[f][3], matriz[f][4]);
     }
+}
+
+void leeTexto(char *arr){
+    printf("Ingrese un texto en mayusculas:\n");
+    int i;
+	for (i = 0; i < (tam-1) && arr[i-1] != 13 ;i++) arr[i]=getche( );
+	if (i==19) arr[i]='\0';
+	else arr[i-1]='\0';
 }
