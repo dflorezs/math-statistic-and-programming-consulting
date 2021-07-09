@@ -7,6 +7,7 @@
 
 //Letra faltante en la matriz
 char codigo;
+char textoCodificado[tam];
 
 //Prototipos de funciones
 void leeCodigo(int matriz[][C]);
@@ -14,20 +15,21 @@ void leeTexto(char *arr);
 void codifica(int matriz[][C], char *arr);
 void decodifica(int matirz[][C], char *arr);
 void muestraMatriz(int matriz[][C]);
-void muestraTexto(int *arr);
+void muestraTexto(char *arr);
 
 int main(){
     int matriz[F][C];
     char textoOriginal[tam];
-    //char *textoCodificado = new char;
+    
     //char *textoDescodificado = new char;
 
     leeCodigo(matriz);
     muestraMatriz(matriz);
     leeTexto(textoOriginal);
-    //muestraTexto(textoOriginal);
-    //codifica(matriz, textoOriginal);
-    //muestraTexto(textoCodificado);
+    muestraTexto(textoOriginal);
+    codifica(matriz, textoOriginal);
+    muestraTexto(textoCodificado);
+    printf("%s", textoCodificado);
     //decodifica(matriz, textoCodificado);
     //muestraTexto(textoDescodificado);
     
@@ -72,3 +74,46 @@ void leeTexto(char *arr){
 	if (i==19) arr[i]='\0';
 	else arr[i-1]='\0';
 }
+
+void muestraTexto(char* arr){
+    printf("\n%s",arr);
+}    
+
+void codifica(int matriz[][C], char *arr){
+    int contador = 0, acumulador = 1, pAscci, sAscci, pmf, pmc, smf, smc;
+    char pElemnto, sElemneto, espacio;
+    // Recorrer el array
+    while (acumulador != (strlen(arr)-1)){
+        if (arr[contador] != 32){
+            pAscci = arr[contador];
+            sAscci = arr[contador+1];
+
+            //Recorrer la matriz
+            for (int i = 0; i < 5; i++){
+                for (int j = 0; j < 5; j++){
+                    if (matriz[i][j] == pAscci){
+                        pmf = i;
+                        pmc = j;
+                    }
+                    if (matriz[i][j] == sAscci){
+                        smf = i;
+                        smc = j;
+                    }
+                }
+            }
+            pElemnto = matriz[pmf][smc];
+            sElemneto = matriz[smf][pmc];
+            textoCodificado[contador] = pElemnto;
+            textoCodificado[contador+1] = sElemneto;
+            contador += 2;
+            acumulador += 1;
+        }else{
+            espacio = 32;
+            textoCodificado[contador] = espacio;
+            contador +=1;
+        }
+        
+    }
+    textoCodificado[19] = '\0';
+}
+
