@@ -5,9 +5,10 @@
 #define C 5
 #define tam 50
 
-//Letra faltante en la matriz
+//declaraciòn de estrucuturas globales
 char codigo;
 char textoCodificado[tam];
+char textoDecodificado[tam];
 
 //Prototipos de funciones
 void leeCodigo(int matriz[][C]);
@@ -18,20 +19,19 @@ void muestraMatriz(int matriz[][C]);
 void muestraTexto(char *arr);
 
 int main(){
+    //Declaracion de estructuras
     int matriz[F][C];
     char textoOriginal[tam];
-    
-
+    //Lllamado a funciones
     leeCodigo(matriz);
     muestraMatriz(matriz);
     leeTexto(textoOriginal);
     muestraTexto(textoOriginal);
     codifica(matriz, textoOriginal);
     muestraTexto(textoCodificado);
-    //decodifica(matriz, textoCodificado);
-    //muestraTexto(textoDescodificado);
-    
-    
+    decodifica(matriz, textoCodificado);
+    muestraTexto(textoDecodificado);
+   
     return 0;
 }
 
@@ -76,7 +76,7 @@ void leeTexto(char *arr){
 
 void muestraTexto(char* arr){
     printf("%s", arr);
-}    
+}  
 
 void codifica(int matriz[][C], char *arr){
     int contador = 0, acumulador = 1, pAscci, sAscci, pmf, pmc, smf, smc;
@@ -139,4 +139,68 @@ void codifica(int matriz[][C], char *arr){
     textoCodificado[strlen(arr)] = '\0';
     printf("\nEl texto codificado es:\n");
 }
+
+void decodifica(int matriz[][C], char *arr){
+    int contador = 0, acumulador = 1, pAscci, sAscci, pmf, pmc, smf, smc;
+    char pElemnto, sElemneto, espacio;
+    // Recorrer el array hasta la penultima posicion
+    while (acumulador != (strlen(arr) - 1)){
+        //Validar que el elemento de la matriz no sea el caracter espacio
+        if (arr[contador] != 32){
+            //Parejas de elementos del array
+            pAscci = arr[contador];
+            sAscci = arr[contador + 1];
+            //valida si cada palabra en el texto ingresado todos los elementos tienen pareja o no es decir si el numero de elementos es par o impar si es impar conserva la ultima letra en el textoCodificado
+            if (arr[contador + 1] == 32 || arr[contador + 1] == '\0'){
+                textoDecodificado[contador] = arr[contador];
+                contador += 1;
+                acumulador += 1;
+            }else{
+                 //validar si el codigo de la matriz se encuentra en el array 
+                if (codigo == arr[contador]){
+                    //Guardar la pareja de elemento conservando el codigo de la matriz en el array textoCodificado
+                    textoDecodificado[contador] = arr[contador];
+                    textoDecodificado[contador + 1] = arr[contador + 1];
+                    contador += 2;
+                    acumulador += 1;
+                }else{
+                    //Recorrer la matriz y buscar la pareja en la matriz
+                    for (int i = 0; i < 5; i++){
+                        for (int j = 0; j < 5; j++){
+                            if (matriz[i][j] == pAscci){
+                                //Guardar los indices del primer elemento de la pareja
+                                pmf = i;
+                                pmc = j;
+                            }
+                            if (matriz[i][j] == sAscci){
+                                //Guardar los indices del segundo elemento de la parjea
+                                smf = i;
+                                smc = j;
+                            }
+                        }
+                    }
+                    //Pareja de elementos codificados
+                    pElemnto = matriz[pmf][smc];
+                    sElemneto = matriz[smf][pmc];
+                    //Guardar la pareja de elementos codificados en el array textoCodificado
+                    textoDecodificado[contador] = pElemnto;
+                    textoDecodificado[contador + 1] = sElemneto;
+                    contador += 2;
+                    acumulador += 1;
+                }
+            }
+           
+          //Cuando el elemento de la matriz sea el caracter espacio entonces añande un espacio en el array textoCodificado  
+        }else{
+            espacio = 32;
+            textoDecodificado[contador] = espacio;
+            contador += 1;
+        }
+    }
+    //Para finalizar la cadena carcteres texto codificado añade el caracter 0
+    textoDecodificado[strlen(arr)] = '\0';
+    printf("\nEl texto Decodificado es:\n");
+}
+
+
 
