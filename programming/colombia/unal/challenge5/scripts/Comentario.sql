@@ -1,9 +1,13 @@
 CREATE SCHEMA spotifyTic;
+USE spotifytic;
+
 CREATE TABLE Comentario(
 	id INTEGER PRIMARY KEY AUTO_INCREMENT,
     documento_usuario INTEGER NOT NULL,
     producto_id INTEGER NOT NULL,
-    opinion VARCHAR(40) NOT NULL
+    opinion VARCHAR(40) NOT NULL,
+    FOREIGN KEY(documento_usuario) REFERENCES Usuario(documento),
+    FOREIGN KEY(producto_id) REFERENCES Producto(id)
 );
 INSERT INTO recurso(rec_titulo) 
 	VALUES('Harry potter y las reliquias de la muerte');

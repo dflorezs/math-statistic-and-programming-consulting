@@ -1,3 +1,6 @@
+CREATE SCHEMA spotifyTic;
+USE spotifyTic;
+
 CREATE TABLE cancion(
 	id INTEGER PRIMARY KEY,
 	producto_id INTEGER NOT NULL,

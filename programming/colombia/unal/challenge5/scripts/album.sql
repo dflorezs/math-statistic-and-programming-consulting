@@ -1,3 +1,6 @@
+CREATE SCHEMA spotifyTic;
+USE spotifyTic;
+
 CREATE TABLE album(
 	id INTEGER PRIMARY KEY,
 	producto_id INTEGER NOT NULL,
