@@ -8,7 +8,6 @@ CREATE TABLE Usuario(
     apellido VARCHAR(40) NOT NULL,
     correo VARCHAR(40) NOT NULL
 );
-
 INSERT INTO Usuario(documento, tipo_documento, nombre, apellido, correo) 
 	VALUES(10000001, 'CC', 'Juan', 'Caicedo', 'jecaicedop@gmail.com');
 INSERT INTO Usuario(documento, tipo_documento, nombre, apellido, correo) 
