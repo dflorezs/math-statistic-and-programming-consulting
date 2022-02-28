@@ -1,2 +1,2 @@
-# Math-statistic-and-programming-consulting
-freelancer academic consultant
+# Math_statistic_and_programming_consulting
+Freelancer academic consultant
