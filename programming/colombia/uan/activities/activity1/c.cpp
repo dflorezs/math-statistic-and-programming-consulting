@@ -15,7 +15,7 @@ int main() {
         cin >> l2;
         cout << "lado3: ";
         cin >> l3;
-        system("clear");
+        system("cls");
         
         if (l1 > 0 && l2 > 0 && l3 > 0)
             esTianguloRectangulo(l1, l2, l3);

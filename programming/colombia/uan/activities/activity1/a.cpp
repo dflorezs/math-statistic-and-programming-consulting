@@ -2,7 +2,7 @@
 #include <math.h>
 using namespace std;
 
-void resolverEcuacionCuadratica(double a, double b, double c);
+void resolverEcuacionCuadratica(double, double, double);
 
 int main() {
     double a, b, c;

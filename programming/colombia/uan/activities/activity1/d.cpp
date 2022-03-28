@@ -8,26 +8,49 @@ void pagoTrabajadoresPorComision();
 void pagoContratistas();
 
 int main() {
-    int code;    
+    int code; 
+    char query[3];    
+
     do{
+        system("cls");
         cout << "*****Nomina empleados*****" <<endl;
+        cout << "Seleccione la opcion que desea consultar" <<endl;
         cout << "1. Gerentes\n2. Trabajadores por hora\n3. Trabajadores a comision\n4. Contratistas\n5. Salir" << endl;
         cin >> code;
-        system("clear");
+        system("cls");
         
-
         switch (code) {
         case 1:
             pagoGerentes();
+            
+            cout << "Digite SI para realizar otra consulta, en caso contrario digite NO" << endl;
+            cin >> query;
+            if (query[0] == 'S') continue;
+            else code = 5;
             break;
         case 2:
             pagoTrabajadoresPorHora();
+            
+            cout << "Digite SI para realizar otra consulta, en caso contrario digite NO" << endl;
+            cin >> query;
+            if (query[0] == 'S') continue;
+            else code = 5;
             break;
         case 3:
             pagoTrabajadoresPorComision();
+
+            cout << "Digite SI para realizar otra consulta, en caso contrario digite NO" << endl;
+            cin >> query;
+            if (query[0] == 'S') continue;
+            else code = 5;
             break;
         case 4:
             pagoContratistas();
+
+            cout << "Digite SI para realizar otra consulta, en caso contrario digite NO" << endl;
+            cin >> query;
+            if (query[0] == 'S') continue;
+            else code = 5;
             break;
         case 5:
             break;
@@ -51,7 +74,7 @@ void pagoGerentes() {
     cout << "Id Gerente\tSalario" << endl;
     for (int gerenteID = 1; gerenteID <= cantidadGerentes; gerenteID++) 
         cout << "\t" << gerenteID << "\t$" << salario << endl;
-    cout << "Total a pagar" << "\t$" << cantidadGerentes*salario;
+    cout << "Total a pagar" << "\t$" << cantidadGerentes*salario << endl;
 }
 
 void pagoTrabajadoresPorHora() {
